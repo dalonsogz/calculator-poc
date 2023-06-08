@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  description: Caculator API to perform basic operations
+  title: Calculator API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /calculator:
+    post:
+      operationId: calculate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/calculate_request'
+        description: Generic simple operation input parameters
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: BigDecimal
+                type: number
+          description: Operation result
+      summary: Generic operation
+      x-content-type: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    calculate_request:
+      properties:
+        firstOp:
+          format: BigDecimal
+          type: number
+        secondOp:
+          format: BigDecimal
+          type: number
+        operation:
+          type: string
+      required:
+      - firstOp
+      - operation
+      - secondOp
+      type: object
+

@@ -2,6 +2,7 @@ package com.calculator.service.impl;
 
 import com.calculator.model.Operation;
 import com.calculator.service.CalculatorService;
+import org.openapitools.client.model.CalculateRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,20 +13,18 @@ import java.util.Locale;
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CalculatorServiceImpl.class);
-
-
     @Override
-    public BigDecimal calculate(BigDecimal firstOperator, BigDecimal secondOperator, String operator) {
+    public BigDecimal calculate(CalculateRequest calculateRequest) {
 
+        BigDecimal firstOperator = calculateRequest.getFirstOp();
+        BigDecimal secondOperator = calculateRequest.getSecondOp();
+        String operation = calculateRequest.getOperation();
 
-        if (firstOperator == null || secondOperator == null || operator == null) {
+        if (firstOperator == null || secondOperator == null || operation == null) {
             throw new RuntimeException("Invalid parameters");
         }
 
-        Operation operation = Operation.valueOf(operator.toUpperCase());
-
-        switch (operation) {
+        switch (Operation.valueOf(operation.toUpperCase())) {
             case ADDITION:
                 return firstOperator.add(secondOperator);
             case SUBTRACTION:
