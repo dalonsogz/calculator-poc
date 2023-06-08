@@ -1,58 +1,37 @@
 package com.calculator.service.impl;
 
-import com.calculator.service.IServicioCalculadora;
-import com.calculator.utils.Operacion;
+import com.calculator.model.Operation;
+import com.calculator.service.CalculatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.Locale;
 
-/**
- * Implementación básica de la interfaz {@link IServicioCalculadora}
- */
 @Service
-public class ServicioCalculadora implements IServicioCalculadora {
+public class CalculatorServiceImpl implements CalculatorService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServicioCalculadora.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CalculatorServiceImpl.class);
 
 
-    /**
-     * Intentamos convertir la operación, sino podemos lanzamos un error,
-     * y realizamos la operación correspondiente
-     * @param primerNumero
-     * @param segundoNumero
-     * @param opTexto
-     * @return
-     */
     @Override
-    public double calcula(BigDecimal primerNumero, BigDecimal segundoNumero, String opTexto) {
+    public BigDecimal calculate(BigDecimal firstOperator, BigDecimal secondOperator, String operator) {
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Calculando resultado para : {} {} {}", primerNumero, segundoNumero, opTexto);
+
+        if (firstOperator == null || secondOperator == null || operator == null) {
+            throw new RuntimeException("Invalid parameters");
         }
 
-        Operacion operacion = Operacion.desdeValor(opTexto);
+        Operation operation = Operation.valueOf(operator.toUpperCase());
 
-        if(operacion == null) {
-            throw new RuntimeException("Operación imposible de procesar: " + opTexto);
-        }
-
-        switch (operacion) {
-            case SUMA:
-                return primerNumero.add(segundoNumero).doubleValue();
-            case RESTA:
-                return primerNumero.subtract(segundoNumero).doubleValue();
-            case MULTIPLICACION:
-                return primerNumero.multiply(segundoNumero).doubleValue();
-            case DIVISION:
-                return primerNumero.divide(segundoNumero, 2, RoundingMode.HALF_UP).doubleValue();
+        switch (operation) {
+            case ADDITION:
+                return firstOperator.add(secondOperator);
+            case SUBTRACTION:
+                return firstOperator.subtract(secondOperator);
             default:
-                if(LOGGER.isErrorEnabled()) {
-                    LOGGER.error("Operación no soportada para ser calculada: {}", operacion);
-                }
-                throw new RuntimeException("Operación no soportada para ser calculada: " + operacion.toString());
+                throw new RuntimeException("Operation not implemented");
 
         }
     }

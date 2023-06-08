@@ -1,7 +1,7 @@
 package com.calculator.controller;
 
-import com.calculator.service.IServicioCalculadora;
-//import io.corp.calculator.TracerImpl;
+import com.calculator.service.CalculatorService;
+import io.corp.calculator.TracerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,26 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 
-/**
- * Gestiona el método GET /api/calcula
- */
 @RestController
-@RequestMapping("/api")
-public class ControladorCalculadora {
+@RequestMapping("/api/v1")
+public class CalculatorController {
+
+    private TracerImpl tracer = new TracerImpl();
 
     @Autowired
-    private IServicioCalculadora servicioCalculadora;
+    private CalculatorService calculatorService;
 
-//    private TracerImpl tracer = new TracerImpl();
+    @GetMapping(value = "/calculate")
+    public ResponseEntity<BigDecimal> calcula(@RequestParam(name = "firstOperator") BigDecimal firstOperator,
+                                            @RequestParam(name = "secondOperator") BigDecimal secondOperator,
+                                            @RequestParam(name = "operation") String operation) {
 
-
-    @GetMapping(value = "/calcula")
-    public ResponseEntity<Double> calcula(@RequestParam(name = "primero") BigDecimal primerNumero,
-                                            @RequestParam(name = "segundo") BigDecimal segundoNumero,
-                                            @RequestParam(name = "operacion") String operacion) {
-
-        double result = this.servicioCalculadora.calcula(primerNumero, segundoNumero, operacion);
-//        tracer.trace(result);
+        BigDecimal result = this.calculatorService.calculate(firstOperator, secondOperator, operation);
+        tracer.trace("firstOperator="+firstOperator+";secondOperator="+secondOperator+";operation="+operation+";result="+result);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
