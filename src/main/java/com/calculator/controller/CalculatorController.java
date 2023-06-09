@@ -1,41 +1,48 @@
 package com.calculator.controller;
 
+import com.calculator.api.CalculatorApi;
+import com.calculator.domain.Operation;
+import com.calculator.model.CalculateRequest;
 import com.calculator.service.CalculatorService;
 import io.corp.calculator.TracerImpl;
-import org.openapitools.client.model.CalculateRequest;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("/api/v1")
-public class CalculatorController {
+//@RequestMapping("/api/v1")
+public class CalculatorController implements CalculatorApi {
 
     private TracerImpl tracer = new TracerImpl();
 
     @Autowired
     private CalculatorService calculatorService;
 
-    @GetMapping(value = "/calculate")
-    public ResponseEntity<BigDecimal> calculate(@RequestParam(name = "firstOperator") BigDecimal firstOperator,
-                                            @RequestParam(name = "secondOperator") BigDecimal secondOperator,
-                                            @RequestParam(name = "operation") String operation) {
+//    @GetMapping(value = "/calculate")
+//    public ResponseEntity<BigDecimal> calculate(@RequestParam(name = "firstOperator") BigDecimal firstOperator,
+//                                            @RequestParam(name = "secondOperator") BigDecimal secondOperator,
+//                                            @RequestParam(name = "operation") String operation) {
+//
+//        BigDecimal result = this.calculatorService.calculate(firstOperator, secondOperator, operation);
+//        tracer.trace("firstOperator="+firstOperator+";secondOperator="+secondOperator+";operation="+operation+";result="+result);
+//        return new ResponseEntity<>(result, HttpStatus.OK);
+//    }
 
-        CalculateRequest calculateRequest = new CalculateRequest();
-        calculateRequest.setFirstOp(firstOperator);
-        calculateRequest.setSecondOp(secondOperator);
-        calculateRequest.setOperation(operation);
+    @Override
+    public ResponseEntity<BigDecimal> calculate(CalculateRequest apiCalculateRequest) {
+        Operation operation = new Operation();
+        operation.firstOperator = apiCalculateRequest.getFirstOp();
+        operation.secondOperator = apiCalculateRequest.getSecondOp();
+        operation.operation = apiCalculateRequest.getOperation();
 
-        BigDecimal result = this.calculatorService.calculate(calculateRequest);
-        tracer.trace("firstOperator="+firstOperator+";secondOperator="+secondOperator+";operation="+operation+";result="+result);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        BigDecimal result = this.calculatorService.calculate(operation.firstOperator, operation.secondOperator,  operation.operation);
+        tracer.trace("firstOperator="+operation.firstOperator+";secondOperator="+operation.secondOperator+";operation="+operation.operation+";result="+result);
+        return ResponseEntity.ok(result);
     }
-
 
 }

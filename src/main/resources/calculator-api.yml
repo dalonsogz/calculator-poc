@@ -21,7 +21,6 @@ paths:
           content:
             application/json:
               schema:
-                format: BigDecimal
                 type: number
           description: Operation result
       summary: Generic operation
@@ -32,10 +31,8 @@ components:
     calculate_request:
       properties:
         firstOp:
-          format: BigDecimal
           type: number
         secondOp:
-          format: BigDecimal
           type: number
         operation:
           type: string

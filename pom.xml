@@ -31,7 +31,7 @@
 		<maven-project-info-reports-plugin.version>2.6</maven-project-info-reports-plugin.version>
 		<maven-javadoc-plugin.version>2.9</maven-javadoc-plugin.version>
 		<openapi-generator.version>6.6.0</openapi-generator.version>
-		<openapi-generator-maven-plugin.version>6.6.0</openapi-generator-maven-plugin.version>
+		<openapi-generator-maven-plugin.version>5.3.0</openapi-generator-maven-plugin.version>
 		<tracer.version>1.0.0</tracer.version>
 
 		<maven-install-plugin.version>3.1.1</maven-install-plugin.version>
@@ -79,17 +79,17 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.10.1</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.google.code.gson</groupId>-->
+<!--			<artifactId>gson</artifactId>-->
+<!--			<version>2.10.1</version>-->
+<!--		</dependency>-->
 
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.1.1</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>javax.ws.rs</groupId>-->
+<!--			<artifactId>javax.ws.rs-api</artifactId>-->
+<!--			<version>2.1.1</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>javax.annotation</groupId>
@@ -97,29 +97,62 @@
 			<version>1.3.2</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.squareup.okio</groupId>
-			<artifactId>okio</artifactId>
-			<version>3.3.0</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.squareup.okio</groupId>-->
+<!--			<artifactId>okio</artifactId>-->
+<!--			<version>3.3.0</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>com.squareup.okhttp3</groupId>-->
+<!--			<artifactId>okhttp</artifactId>-->
+<!--			<version>4.11.0</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>com.squareup.okhttp3</groupId>-->
+<!--			<artifactId>logging-interceptor</artifactId>-->
+<!--			<version>4.11.0</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>io.gsonfire</groupId>-->
+<!--			<artifactId>gson-fire</artifactId>-->
+<!--			<version>1.8.5</version>-->
+<!--		</dependency>-->
 
 		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>4.11.0</version>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.1</version>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.springfox</groupId>-->
+<!--			<artifactId>springfox-swagger-ui</artifactId>-->
+<!--			<version>2.9.2</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>io.springfox</groupId>-->
+<!--			<artifactId>springfox-swagger2</artifactId>-->
+<!--			<version>2.9.2</version>-->
+<!--		</dependency>-->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>logging-interceptor</artifactId>
-			<version>4.11.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.gsonfire</groupId>
-			<artifactId>gson-fire</artifactId>
-			<version>1.8.5</version>
-		</dependency>
 
 	</dependencies>
 
@@ -173,28 +206,29 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<version>${maven-site-plugin.version}</version>
 			</plugin>
-
-<!--			<plugin>-->
-<!--				<groupId>org.openapitools</groupId>-->
-<!--				<artifactId>openapi-generator-maven-plugin</artifactId>-->
-<!--				&lt;!&ndash; RELEASE_VERSION &ndash;&gt;-->
-<!--				<version>${openapi-generator-maven-plugin.version}</version>-->
-<!--				&lt;!&ndash; /RELEASE_VERSION &ndash;&gt;-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<goals>-->
-<!--							<goal>generate</goal>-->
-<!--						</goals>-->
-<!--						<configuration>-->
-<!--							<inputSpec>${project.basedir}/src/main/resources/calculator-api.json</inputSpec>-->
-<!--							<generatorName>java</generatorName>-->
-<!--							<configOptions>-->
-<!--								<sourceFolder>src//main</sourceFolder>-->
-<!--							</configOptions>-->
-<!--						</configuration>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapi-generator-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/calculator-api.yml</inputSpec>
+							<generatorName>spring</generatorName>
+<!--							<configHelp>true</configHelp>-->
+							<packageName>com.calculator</packageName>
+							<apiPackage>com.calculator.api</apiPackage>
+							<modelPackage>com.calculator.model</modelPackage>
+							<configOptions>
+								<interfaceOnly>true</interfaceOnly>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
