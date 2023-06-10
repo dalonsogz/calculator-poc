@@ -1,44 +1,41 @@
 openapi: 3.0.0
+
 info:
-  description: Caculator API to perform basic operations
   title: Calculator API
+  description: Calculator API to perform basic operations
   version: 1.0.0
+
 servers:
-- url: /
+  - url: https://localhost:8080/api/v1
+    description: Local server
+
 paths:
-  /calculator:
-    post:
+  /calculate:
+    get:
       operationId: calculate
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/calculate_request'
-        description: Generic simple operation input parameters
-        required: true
+      summary: Generic operation
+      parameters:
+        - in: query
+          name: firstOperator
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: secondOperator
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: operation
+          required: true
+          schema:
+            type: string
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
                 type: number
           description: Operation result
-      summary: Generic operation
-      x-content-type: application/json
-      x-accepts: application/json
-components:
-  schemas:
-    calculate_request:
-      properties:
-        firstOp:
-          type: number
-        secondOp:
-          type: number
-        operation:
-          type: string
-      required:
-      - firstOp
-      - operation
-      - secondOp
-      type: object
-
+        '404':
+          description: Operation not found

@@ -1,23 +1,20 @@
 package com.calculator.service.impl;
 
-import com.calculator.model.Operation;
 import com.calculator.service.CalculatorService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.corp.calculator.TracerImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Locale;
 
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
 
+    @Autowired
+    private TracerImpl tracer;
+
     @Override
     public BigDecimal calculate(BigDecimal firstOperator, BigDecimal secondOperator, String operation) {
-
-        if (firstOperator == null || secondOperator == null || operation == null) {
-            throw new RuntimeException("Invalid parameters");
-        }
 
         switch (Operation.valueOf(operation.toUpperCase())) {
             case ADDITION:
@@ -25,8 +22,7 @@ public class CalculatorServiceImpl implements CalculatorService {
             case SUBTRACTION:
                 return firstOperator.subtract(secondOperator);
             default:
-                throw new RuntimeException("Operation not implemented");
-
+                throw new RuntimeException("Invalid operation");
         }
     }
 }

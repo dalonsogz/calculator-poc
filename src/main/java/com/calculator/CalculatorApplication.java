@@ -1,14 +1,20 @@
 package com.calculator;
 
+import io.corp.calculator.TracerImpl;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.calculator")
-public class CalculatorApplication { // extends SpringBootServletInitializer {
+public class CalculatorApplication {
+
+    @Bean
+    public TracerImpl tracerImpl() {
+        return new TracerImpl();
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(CalculatorApplication.class, args);
