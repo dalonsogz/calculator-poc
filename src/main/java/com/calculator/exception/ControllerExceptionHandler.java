@@ -5,7 +5,6 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.Date;
@@ -14,11 +13,11 @@ import java.util.Date;
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(value =  {IllegalArgumentException.class, MissingServletRequestParameterException.class} )
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(value = {IllegalArgumentException.class, MissingServletRequestParameterException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorMessage illegalArgumentExceptionHandler(Exception ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
-                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.BAD_REQUEST.value(),
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));

@@ -34,6 +34,7 @@
         <validation-api.version>2.0.1.Final</validation-api.version>
         <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
+        <javax.servlet.version>2.5</javax.servlet.version>
 
         <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
         <tracer.version>1.0.0</tracer.version>
@@ -93,9 +94,7 @@
             <version>${junit-jupiter-engine.version}</version>
             <scope>test</scope>
         </dependency>
-
-
-        <dependency>
+       <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>${javax.annotation-api.version}</version>
@@ -129,7 +128,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>${javax.servlet.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -186,9 +185,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <argLine>
-                        --illegal-access=permit
-                    </argLine>
+                    <argLine>--illegal-access=permit</argLine>
                     <testFailureIgnore>true</testFailureIgnore>
                     <forkCount>2</forkCount>
                     <reuseForks>true</reuseForks>

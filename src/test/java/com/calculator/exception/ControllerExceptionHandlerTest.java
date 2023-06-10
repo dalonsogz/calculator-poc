@@ -30,13 +30,13 @@ class ControllerExceptionHandlerTest {
     @Test
     public void testMissingServletRequestParameterExceptionHandler() {
         final var responseEntity = controllerExceptionHandler.illegalArgumentExceptionHandler(new MissingServletRequestParameterException("param", "paramype", false), servletWebRequest);
-        Assert.assertEquals(HttpStatus.NOT_FOUND.value(), responseEntity.getStatusCode());
+        Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), responseEntity.getStatusCode());
     }
 
     @Test
     public void testIllegalArgumentExceptionHandler() {
         final var responseEntity = controllerExceptionHandler.illegalArgumentExceptionHandler(new IllegalArgumentException(), servletWebRequest);
-        Assert.assertEquals(HttpStatus.NOT_FOUND.value(), responseEntity.getStatusCode());
+        Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), responseEntity.getStatusCode());
     }
 
     @Test

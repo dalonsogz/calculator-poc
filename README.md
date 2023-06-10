@@ -63,7 +63,7 @@ target/
 At the time of the first 'release' of the first 'alpha' version these are the main dependencies and versions used.
 
 - Main dependencies:
-  - Java 1.17
+  - Java 17
   - Spring Boot 3.1.0
 
 
@@ -168,14 +168,14 @@ Try to perform an unsupported operation:
 ```commandline
 curl 'http://localhost:8080/api/v1/calculate?firstOperator=98.5&secondOperator=9.3234&operation=division'
 
-{"statusCode":404,"timestamp":"2023-06-09T14:39:27.329+00:00","message":"No enum constant com.calculator.service.CalculatorService.Operation.DIVISION","description":"uri=/api/v1/calculate"}
+{"statusCode":400,"timestamp":"2023-06-09T14:39:27.329+00:00","message":"No enum constant com.calculator.service.CalculatorService.Operation.DIVISION","description":"uri=/api/v1/calculate"}
 ```
 
 Try to perform an operation providing only one operator:
 ```commandline
 curl 'http://localhost:8080/api/v1/calculate?secondOperator=9.3234&operation=addition'
 
-{"statusCode":404,"timestamp":"2023-06-09T14:40:08.829+00:00","message":"Required request parameter 'firstOperator' for method parameter type BigDecimal is not present","description":"uri=/api/v1/calculate"}
+{"statusCode":400,"timestamp":"2023-06-09T14:40:08.829+00:00","message":"Required request parameter 'firstOperator' for method parameter type BigDecimal is not present","description":"uri=/api/v1/calculate"}
 ```
 
 
