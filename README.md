@@ -1,7 +1,18 @@
 # calculator-poc 
 
+### Contents
 
-### Main project structure:
+- [Main project structure](#structure)  
+- [Dependencies](#dependencies)  
+- [Project scope](#scope)  
+- [Compilation and quick-start](#compilation)  
+- [Examples](#examples)  
+
+
+
+
+### Main project structure: 
+<a name="structure"/>
 
 ```
 src/
@@ -46,6 +57,7 @@ target/
 
 
 ### Dependencies
+<a name="dependencies"/>
 
 At the time of the first 'release' of the first 'alpha' version these are the main dependencies and versions used.
 
@@ -75,6 +87,7 @@ At the time of the first 'release' of the first 'alpha' version these are the ma
 Also Apache Maven is needed to compile and run this project. Apache Maven v3.2.5 has been used for this development.
 
 ### Project scope
+<a name="scope"/>
 
 The main objective of this project is to provide a base 'skeleton', following the following requirements:
 
@@ -88,6 +101,7 @@ The main objective of this project is to provide a base 'skeleton', following th
 The implemented functionality is that of a calculator capable of performing addition and subtraction, with BigDecimal operands.
 
 ### Compilation and quick-start
+<a name="compilation"/>
 
 To compile and start the application from scratch, clone the project from the repository and input these commands:
 
@@ -129,6 +143,7 @@ The string result of the operation will be returned.
 If any of the parameters is missing or its value is invalid, a message alerting the user of the cause is returned as well.
 
 #### Examples
+<a name="examples"/>
 
 Perform an addition operation:
 ```commandline
