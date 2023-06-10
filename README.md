@@ -11,7 +11,7 @@
 
 <a name="structure"/>
 
-### Main project structure: 
+### Main project structure 
 
 
 ```
