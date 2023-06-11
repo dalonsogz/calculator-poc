@@ -1,6 +1,7 @@
 package com.calculator.controller;
 
 import com.calculator.api.CalculateApi;
+import com.calculator.model.OperationResponse;
 import com.calculator.service.CalculatorService;
 import io.corp.calculator.TracerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,13 @@ import java.math.BigDecimal;
 public class CalculatorController implements CalculateApi {
 
     @Autowired
-    private TracerImpl tracer;
+    TracerImpl tracer;
 
     @Autowired
     private CalculatorService calculatorService;
 
     @Override
-    public ResponseEntity<BigDecimal> calculate(BigDecimal firstOperator, BigDecimal secondOperator, String operation) {
+    public ResponseEntity<OperationResponse> calculate(BigDecimal firstOperator, BigDecimal secondOperator, String operation) {
 
         BigDecimal result = this.calculatorService.calculate(firstOperator, secondOperator, operation);
 
@@ -30,7 +31,7 @@ public class CalculatorController implements CalculateApi {
                 ";operation=" + operation +
                 "result=" + result);
 
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(new OperationResponse().result(result));
     }
 
 

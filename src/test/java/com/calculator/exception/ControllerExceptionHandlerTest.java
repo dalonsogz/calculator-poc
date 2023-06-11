@@ -5,17 +5,12 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.context.request.ServletWebRequest;
-
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CalculatorApplication.class)
@@ -29,7 +24,7 @@ class ControllerExceptionHandlerTest {
 
     @Test
     public void testMissingServletRequestParameterExceptionHandler() {
-        final var responseEntity = controllerExceptionHandler.illegalArgumentExceptionHandler(new MissingServletRequestParameterException("param", "paramype", false), servletWebRequest);
+        final var responseEntity = controllerExceptionHandler.illegalArgumentExceptionHandler(new MissingServletRequestParameterException("param", "paramType", false), servletWebRequest);
         Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), responseEntity.getStatusCode());
     }
 

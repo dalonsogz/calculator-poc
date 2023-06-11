@@ -19,13 +19,13 @@ public class ErrorMessage {
         return statusCode;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public String getMessage() { return message; }
-
-    public String getDescription() {
-        return description;
-    }
+//    public Date getTimestamp() {
+//        return timestamp;
+//    }
+//
+//    public String getMessage() { return message; }
+//
+//    public String getDescription() {
+//        return description;
+//    }
 }

@@ -1,5 +1,7 @@
 package com.calculator.service.impl;
 
+import com.calculator.exception.InvalidOperationException;
+import com.calculator.model.Operation;
 import com.calculator.service.CalculatorService;
 import io.corp.calculator.TracerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,7 @@ import java.math.BigDecimal;
 public class CalculatorServiceImpl implements CalculatorService {
 
     @Autowired
-    private TracerImpl tracer;
+    TracerImpl tracer;
 
     @Override
     public BigDecimal calculate(BigDecimal firstOperator, BigDecimal secondOperator, String operation) {
@@ -22,7 +24,7 @@ public class CalculatorServiceImpl implements CalculatorService {
             case SUBTRACTION:
                 return firstOperator.subtract(secondOperator);
             default:
-                throw new RuntimeException("Invalid operation");
+                throw new InvalidOperationException("Invalid operation");
         }
     }
 }

@@ -32,10 +32,25 @@ paths:
             type: string
       responses:
         '200':
+          description: Operation result
           content:
             application/json:
               schema:
-                type: number
-          description: Operation result
+                $ref: '#/components/schemas/OperationResponse'
         '404':
           description: Operation not found
+
+components:
+  schemas:
+    OperationResponse:
+      type: object
+      properties:
+        result:
+          type: number
+      required:
+        - result
+    Operation:
+      type: string
+      enum:
+        - ADDITION
+        - SUBTRACTION
