@@ -1,43 +1,48 @@
 package com.calculator.exception;
 
-import com.calculator.CalculatorApplication;
-import org.junit.Assert;
+import com.calculator.model.ErrorMessage;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Spy;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.context.request.WebRequest;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = CalculatorApplication.class)
-class ControllerExceptionHandlerTest {
+public class ControllerExceptionHandlerTest {
 
-    @Mock
-    private ServletWebRequest servletWebRequest;
-
-    @Spy
-    private ControllerExceptionHandler controllerExceptionHandler;
-
-    @Test
-    public void testMissingServletRequestParameterExceptionHandler() {
-        final var responseEntity = controllerExceptionHandler.illegalArgumentExceptionHandler(new MissingServletRequestParameterException("param", "paramType", false), servletWebRequest);
-        Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), responseEntity.getStatusCode());
-    }
+    private final ControllerExceptionHandler exceptionHandler = new ControllerExceptionHandler();
 
     @Test
     public void testIllegalArgumentExceptionHandler() {
-        final var responseEntity = controllerExceptionHandler.illegalArgumentExceptionHandler(new IllegalArgumentException(), servletWebRequest);
-        Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), responseEntity.getStatusCode());
+        // Arrange
+        IllegalArgumentException exception = new IllegalArgumentException("Invalid argument");
+        WebRequest request = Mockito.mock(WebRequest.class);
+        Mockito.when(request.getDescription(false)).thenReturn("Request description");
+
+        // Act
+        ErrorMessage errorMessage = exceptionHandler.illegalArgumentExceptionHandler(exception, request);
+
+        // Assert
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), errorMessage.getStatusCode());
+        Assertions.assertNotNull(errorMessage.getTimestamp());
+        Assertions.assertEquals("Invalid argument", errorMessage.getMessage());
+        Assertions.assertEquals("Request description", errorMessage.getDescription());
     }
 
     @Test
     public void testGlobalExceptionHandler() {
-        final var responseEntity = controllerExceptionHandler.globalExceptionHandler(new Exception(), servletWebRequest);
-        Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), responseEntity.getStatusCode());
-    }
+        // Arrange
+        Exception exception = new Exception("Internal server error");
+        WebRequest request = Mockito.mock(WebRequest.class);
+        Mockito.when(request.getDescription(false)).thenReturn("Request description");
 
+        // Act
+        ErrorMessage errorMessage = exceptionHandler.globalExceptionHandler(exception, request);
+
+        // Assert
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), errorMessage.getStatusCode());
+        Assertions.assertNotNull(errorMessage.getTimestamp());
+        Assertions.assertEquals("Internal server error", errorMessage.getMessage());
+        Assertions.assertEquals("Request description", errorMessage.getDescription());
+    }
 }
+

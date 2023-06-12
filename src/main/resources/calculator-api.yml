@@ -54,3 +54,20 @@ components:
       enum:
         - ADDITION
         - SUBTRACTION
+    ErrorMessage:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time
+        message:
+          type: string
+        description:
+          type: string
+      required:
+        - statusCode
+        - timestamp
+        - message
+        - description

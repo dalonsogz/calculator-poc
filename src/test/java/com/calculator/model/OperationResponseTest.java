@@ -3,6 +3,8 @@ package com.calculator.model;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -48,6 +50,13 @@ class OperationResponseTest {
                 "    result: 55.8\n" +
                 "}";
         assertEquals(expectedToString, response.toString());
+
+        response.setResult(null);
+        Pattern pattern = Pattern.compile("result: (\\w+)");
+        Matcher matcher = pattern.matcher(response.toString());
+        matcher.find();
+        String nullValue = matcher.group(1);
+        assertEquals("null", nullValue);
     }
 
     @Test
@@ -68,5 +77,6 @@ class OperationResponseTest {
         assertNotEquals(response1, response3);
         assertEquals(response1, response1);
         assertEquals(false, response1.equals(null));
+        assertEquals(false, response1.equals(""));
     }
 }

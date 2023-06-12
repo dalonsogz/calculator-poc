@@ -1,6 +1,5 @@
 package com.calculator.exception;
 
-import com.calculator.exception.InvalidOperationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
