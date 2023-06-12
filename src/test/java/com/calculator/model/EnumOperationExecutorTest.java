@@ -8,10 +8,10 @@ import java.math.BigDecimal;
 public class EnumOperationExecutorTest {
 
 
-    private final EnumOperationExecutor operationExecutor = new EnumOperationExecutor();
+    final EnumOperationExecutor operationExecutor = new EnumOperationExecutor();
 
     @Test
-    public void testExecute_Addition_Success() {
+    void testExecute_Addition_Success() {
         // Arrange
         BigDecimal firstOperator = BigDecimal.valueOf(10);
         BigDecimal secondOperator = BigDecimal.valueOf(5);
@@ -25,7 +25,7 @@ public class EnumOperationExecutorTest {
     }
 
     @Test
-    public void testExecute_Subtraction_Success() {
+    void testExecute_Subtraction_Success() {
         // Arrange
         BigDecimal firstOperator = BigDecimal.valueOf(10);
         BigDecimal secondOperator = BigDecimal.valueOf(5);

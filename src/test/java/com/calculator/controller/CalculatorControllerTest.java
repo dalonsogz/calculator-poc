@@ -18,13 +18,13 @@ import static org.mockito.Mockito.when;
 class CalculatorControllerTest {
 
     @Mock
-    private TracerImpl tracer;
+    TracerImpl tracer;
 
     @Mock
-    private CalculatorService calculatorService;
+    CalculatorService calculatorService;
 
     @InjectMocks
-    private CalculatorController calculatorController;
+    CalculatorController calculatorController;
 
     @BeforeEach
     void setUp() {

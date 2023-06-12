@@ -14,7 +14,7 @@ class OperationResponseTest {
 
 
     @Test
-    public void testResultGetterSetter() {
+    void testResultGetterSetter() {
         BigDecimal expectedResult = new BigDecimal("55.8");
         OperationResponse response = new OperationResponse();
         response.setResult(expectedResult);
@@ -22,7 +22,7 @@ class OperationResponseTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         BigDecimal result1 = new BigDecimal("55.8");
         BigDecimal result2 = new BigDecimal("55.8");
         BigDecimal differentResult = new BigDecimal("99.9");
@@ -40,7 +40,7 @@ class OperationResponseTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         BigDecimal result = new BigDecimal("55.8");
 
         OperationResponse response = new OperationResponse();
@@ -60,7 +60,7 @@ class OperationResponseTest {
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         BigDecimal result1 = new BigDecimal("55.8");
         BigDecimal result2 = new BigDecimal("55.8");
         BigDecimal differentResult = new BigDecimal("99.9");

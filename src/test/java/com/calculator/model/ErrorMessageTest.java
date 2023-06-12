@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ErrorMessageTest {
 
     @Test
-    public void testConstructorAndGetters() {
+    void testConstructorAndGetters() {
         int statusCode = 404;
         OffsetDateTime timestamp = OffsetDateTime.now();
         String message = "Not Found";
@@ -30,7 +30,7 @@ public class ErrorMessageTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         int statusCode = 500;
         OffsetDateTime timestamp = OffsetDateTime.now();
 
@@ -59,13 +59,13 @@ public class ErrorMessageTest {
     }
 
     @Test
-    public void testNoArgsConstructor() {
+    void testNoArgsConstructor() {
         ErrorMessage errorMessage = new ErrorMessage();
         assertNotNull(errorMessage);
     }
 
     @Test
-    public void testSetters() {
+    void testSetters() {
         int statusCode = 400;
         OffsetDateTime timestamp = OffsetDateTime.now();
         String message = "Bad Request";
@@ -84,7 +84,7 @@ public class ErrorMessageTest {
     }
 
     @Test
-    public void testEqualsAndHashCode() {
+    void testEqualsAndHashCode() {
         int statusCode = 200;
         OffsetDateTime timestamp = OffsetDateTime.now();
         String message = "OK";
@@ -122,7 +122,7 @@ public class ErrorMessageTest {
     }
 
     @Test
-    public void testSetsGets() {
+    void testSetsGets() {
         int statusCode = 200;
         OffsetDateTime timestamp = OffsetDateTime.now();
         String message = "OK";

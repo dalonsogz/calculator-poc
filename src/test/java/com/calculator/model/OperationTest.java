@@ -9,25 +9,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class OperationTest {
 
     @Test
-    public void testGetValue() {
+    void testGetValue() {
         assertEquals("ADDITION", Operation.ADDITION.getValue());
         assertEquals("SUBTRACTION", Operation.SUBTRACTION.getValue());
     }
 
     @Test
-    public void testFromString_ValidValue() {
+    void testFromString_ValidValue() {
         assertEquals(Operation.ADDITION, Operation.fromValue("ADDITION"));
         assertEquals(Operation.SUBTRACTION, Operation.fromValue("SUBTRACTION"));
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         assertEquals("ADDITION", Operation.ADDITION.toString());
         assertEquals("SUBTRACTION", Operation.SUBTRACTION.toString());
     }
 
     @Test
-    public void testFromString_InvalidValue() {
+    void testFromString_InvalidValue() {
         assertThrows(IllegalArgumentException.class, () -> Operation.fromValue("INVALID"));
     }
 }

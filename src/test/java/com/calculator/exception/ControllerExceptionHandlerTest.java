@@ -9,10 +9,10 @@ import org.springframework.web.context.request.WebRequest;
 
 public class ControllerExceptionHandlerTest {
 
-    private final ControllerExceptionHandler exceptionHandler = new ControllerExceptionHandler();
+    final ControllerExceptionHandler exceptionHandler = new ControllerExceptionHandler();
 
     @Test
-    public void testIllegalArgumentExceptionHandler() {
+    void testIllegalArgumentExceptionHandler() {
         // Arrange
         IllegalArgumentException exception = new IllegalArgumentException("Invalid argument");
         WebRequest request = Mockito.mock(WebRequest.class);
@@ -29,7 +29,7 @@ public class ControllerExceptionHandlerTest {
     }
 
     @Test
-    public void testGlobalExceptionHandler() {
+    void testGlobalExceptionHandler() {
         // Arrange
         Exception exception = new Exception("Internal server error");
         WebRequest request = Mockito.mock(WebRequest.class);

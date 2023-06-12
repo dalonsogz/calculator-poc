@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 public class InvalidOperationExceptionTest {
 
     @Test
-    public void testDefaultConstructor() {
+    void testDefaultConstructor() {
         InvalidOperationException exception = new InvalidOperationException();
         Assertions.assertNull(exception.getMessage());
     }
 
     @Test
-    public void testConstructorWithMessage() {
+    void testConstructorWithMessage() {
         String errorMessage = "Invalid operation";
         InvalidOperationException exception = new InvalidOperationException(errorMessage);
         Assertions.assertEquals(errorMessage, exception.getMessage());

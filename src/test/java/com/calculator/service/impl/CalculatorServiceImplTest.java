@@ -17,10 +17,10 @@ import java.math.BigDecimal;
 class CalculatorServiceImplTest {
 
     @Mock
-    private OperationExecutor operationExecutor;
+    OperationExecutor operationExecutor;
 
     @InjectMocks
-    private CalculatorServiceImpl calculatorService;
+    CalculatorServiceImpl calculatorService;
 
     @BeforeEach
     void setUp() {
