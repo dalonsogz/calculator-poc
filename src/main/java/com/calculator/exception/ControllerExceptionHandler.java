@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(value = {IllegalArgumentException.class, MissingServletRequestParameterException.class})
+    @ExceptionHandler(value = {InvalidOperationException.class, MissingServletRequestParameterException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorMessage illegalArgumentExceptionHandler(Exception ex, WebRequest request) {
         ErrorMessage errorMessage = new ErrorMessage();

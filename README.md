@@ -154,30 +154,33 @@ If any of the parameters is missing or its value is invalid, a message alerting 
 Perform an addition operation:
 ```commandline
 curl -X GET 'http://localhost:8080/api/v1/calculate?firstOperator=-4.2315&secondOperator=9.3234&operation=addition'
-
-{"result":5.0919}
 ```
+`
+{"result":5.0919}
+`
 
 Perform a subtraction operation:
 ```commandline
 curl 'http://localhost:8080/api/v1/calculate?firstOperator=98.5&secondOperator=1.5&operation=subtraction'
-
-{"result":97.0}
 ```
+`
+{"result":97.0}
+`
 
 Try to perform an unsupported operation:
 ```commandline
 curl 'http://localhost:8080/api/v1/calculate?firstOperator=98.5&secondOperator=9.3234&operation=division'
-
-{"statusCode":400,"timestamp":"2023-06-11T19:07:19.992+00:00","message":"No enum constant com.calculator.model.Operation.DIVISION","description":"uri=/api/v1/calculate"}
 ```
+`
+{"statusCode":400,"timestamp":"2023-06-12T13:20:19.5143452+02:00","message":"Unsupported operation: division","description":"uri=/api/v1/calculate"}
+`
 
 Try to perform an operation providing only one operator:
 ```commandline
 curl 'http://localhost:8080/api/v1/calculate?secondOperator=9.3234&operation=addition'
-
-{"statusCode":400,"timestamp":"2023-06-11T19:08:01.575+00:00","message":"Required request parameter 'firstOperator' for method parameter type BigDecimal is not present","description":"uri=/api/v1/calculate"}
 ```
-
+`
+{"statusCode":400,"timestamp":"2023-06-12T13:20:30.248695+02:00","message":"Required request parameter 'firstOperator' for method parameter type BigDecimal is not present","description":"uri=/api/v1/calculate"}
+`
 
 

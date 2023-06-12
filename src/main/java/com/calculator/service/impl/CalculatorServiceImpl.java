@@ -30,7 +30,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         try {
             operationEnum = Operation.valueOf(operation.toUpperCase());
         } catch (IllegalArgumentException iae) {
-            throw new InvalidOperationException("Invalid operation: " + operation);
+            throw new InvalidOperationException("Unsupported operation: " + operation);
         }
         OperationExecutor executor = operationExecutors.get(operationEnum);
 
