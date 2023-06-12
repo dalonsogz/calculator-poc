@@ -22,6 +22,7 @@ src/
 │     │  └─ calculator/
 │     │     ├─ controller/
 │     │     ├─ exception/
+│     │     ├─ model/
 │     │     └─ service/
 │     │        └─ impl/
 │     └─ resources/
@@ -31,7 +32,7 @@ src/
       └─ com/
          └─ calculator/
             ├─ api/
-            └─ exception/
+            └─ model/
 
 target/
 ├─ generated-sources/
@@ -45,8 +46,8 @@ target/
 
 - src: provided source code, following a typical structure used in projects based in java-spring-boot-rest services development.
   - controller: classes exposing the API rest endpoints.
-  
   - exception: custom exception classes and exception handling classes.
+  - model: definitions of data handled by the application and supporting classes.
   - service/impl: classes that define the business operations.
   - resources: typically containing static resources like application configuration. In this project only the openapi res contract definition is needed.
   - test: classes to perform unit testing.
