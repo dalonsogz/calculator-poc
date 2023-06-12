@@ -19,7 +19,7 @@ public class CalculatorController implements CalculateApi {
     TracerImpl tracer;
 
     @Autowired
-    private CalculatorService calculatorService;
+    CalculatorService calculatorService;
 
     @Override
     public ResponseEntity<OperationResponse> calculate(BigDecimal firstOperator, BigDecimal secondOperator, String operation) {
